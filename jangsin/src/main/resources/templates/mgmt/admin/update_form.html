@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <h5 class="modal-title">관리자 수정</h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+  <form name="update_form" action="/mgmt/admin/update" method="POST">
+    <div class="form-group">
+      <label>아이디</label>
+      <input type="text" name="userid" class="form-control" readonly required pattern="[a-zA-Z0-9]+" th:value="${admin.userid}" />
+      <input type="hidden" name="id" th:value="${admin.id}" />
+    </div>
+    <div class="form-group">
+      <label>별명 <small>(필수)</small> </label>
+      <input type="text" id="nick" name="nick" class="form-control" required th:value="${admin.nick}" />
+    </div>
+    <br>
+    <div class="form-group" style="text-align: right;">
+      <input class="btn btn-primary" type="submit" value="관리자 수정" />
+    </div>
+  </form>
+</div>

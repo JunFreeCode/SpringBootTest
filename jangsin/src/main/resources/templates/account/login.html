@@ -1,0 +1,38 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="staticBackdropLabel"><b>로그인</b></h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+  <form th:action="@{/account/login}" method="POST">
+    <label for="username">
+      <i class="fas fa-user"></i>
+      Username
+    </label>
+    <div>
+      <input type="text" id="username" placeholder="Username" required />
+    </div>
+    <label for="Password">
+      <i class="fas fa-key"></i>
+      Password
+    </label>
+    <div>
+      <input type="password" id="password" placeholder="Password" required />
+    </div>
+    <div>
+      <input type="hidden" id="token" data-token-name="${_csrf.headerName}" placeholder="Password"
+        value="${_csrf.token}">
+    </div>
+    <div>
+      <button class="btn-login btn-dark" type="button" id="login-button">
+        <i class="fas fa-lock"></i>
+        Login
+      </button>
+    </div>
+
+    <div class="foot">
+      <a href="#" class="new-acc">
+        I don't have an account!!!
+      </a>
+    </div>
+  </form>
+</div>

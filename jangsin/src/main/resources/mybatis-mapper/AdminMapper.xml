@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tutorial.jangsin.mapper.AdminMapper">
+    <select id="listAdmin" resultType="Admin">
+        CALL SP_LIST_ADMIN()
+    </select>
+
+    <insert id="insertAdmin">
+        CALL SP_INSERT_ADMIN(#{userid},#{password},#{nick})
+    </insert>
+
+    <select id="getAdmin" resultType="Admin">
+        CALL SP_GET_ADMIN(#{id})
+    </select>
+
+    <update id="updateAdminPassword">
+        CALL SP_UPDATE_ADMIN_PASSWORD(#{id},#{password})
+    </update>
+
+    <delete id="deleteAdmin">
+        CALL SP_DELETE_ADMIN(#{id})
+    </delete>
+
+    <update id="updateAdmin">
+        CALL SP_UPDATE_ADMIN(#{id},#{nick})
+    </update>
+
+</mapper>

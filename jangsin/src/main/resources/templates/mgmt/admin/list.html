@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{fragment/common}">
+
+<th:block layout:fragment="content">
+  <main class="flex-shrink-0">
+    <div class="container">
+      <h2>관리자 목록</h2>
+      <div style="text-align: right;">
+        <a href="javascript:show_dialog('/mgmt/admin/insert_form');" class="btn btn-sm btn-outline-dark">관리자 추가</a>
+      </div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th style="text-align: center;">아이디</th>
+            <th style="text-align: center;">별명</th>
+            <th style="text-align: center;">수정/삭제</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="admin : ${admins}">
+            <td style="text-align: center;" th:text="${admin.userid}"></td>
+            <td style="text-align: center;" th:text="${admin.nick}"></td>
+            <td style="text-align: center;">
+              <div class="btn-group" role="group">
+                <a th:href="|javascript:show_dialog('/mgmt/admin/chg_passwd_form/${admin.id}');|"
+                  class="btn btn-sm btn-seceondary">비밀번호변경</a>
+                <a th:href="|javascript:show_dialog('/mgmt/admin/update_form/${admin.id}');|"
+                  class="btn btn-sm btn-light">수정</a>
+                <button th:onclick="|delete_admin('/mgmt/admin/delete/${admin.id}')|" type="button"
+                  class="btn btn-sm btn-danger">삭제</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="myModal" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+    //Modal Remote Reload
+    // hidden.bs.modal : 모달의 닫힘이 끝나고 실행되는 이벤트입니다.
+    $(document).on('hidden.bs.modal', function (e) {
+      $(e.target).removeData('bs.modal');
+    })
+
+    function show_dialog(url) {
+      $('#myModal .modal-content').load(url, function (e) {
+        $('#myModal').modal('show');
+      })
+    }
+
+    function delete_admin(url) {
+      var result = confirm("관리자를 정말로 삭제하시겠습니까?");
+      if (result == false) return;
+      location.href = url;
+    }
+
+  </script>
+
+</th:block>
+
+</html>
